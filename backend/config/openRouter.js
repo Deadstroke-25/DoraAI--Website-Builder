@@ -1,5 +1,5 @@
 const openRouterUrl = 'https://openrouter.ai/api/v1/chat/completions'
-const model = 'deepseek/deepseek-chat'
+const model = 'google/gemma-4-31b-it:free'
 
 export const generateResponse = async (prompt) => {
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -9,7 +9,7 @@ export const generateResponse = async (prompt) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            model: 'deepseek/deepseek-chat',
+            model: model,
             messages: [
                 {
                     role: 'system',
@@ -20,12 +20,12 @@ export const generateResponse = async (prompt) => {
                     content: prompt,
                 },
             ],
-            temperature:0.2
+            temperature: 0.2
         }),
     });
-    if(!res.ok){
+    if (!res.ok) {
         const err = await res.text()
-        throw new Error("OpenRouter err"+ err)
+        throw new Error("OpenRouter err" + err)
     }
 
     const data = await res.json()
