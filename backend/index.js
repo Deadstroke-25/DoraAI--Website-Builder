@@ -19,7 +19,8 @@ app.get("/", (req, res) => {
         success: true,
         message: "Server is running",
         dbStatus: mongoose.connection.readyState,
-        hasMongoUri: !!process.env.MONGO_URI
+        hasMongoUri: !!process.env.MONGO_URI,
+        dbError: global.dbError || null
     });
 });
 
