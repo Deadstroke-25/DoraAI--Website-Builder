@@ -19,7 +19,7 @@ const LoginModal = ({ open, onClose }) => {
                 avatar: result.user.photoURL,
                 idToken: idToken
             }, { withCredentials: true })
-            dispatch(setUserData(data))
+            dispatch(setUserData(data.user))
             onClose()
         } catch (error) {
             console.log(error)
