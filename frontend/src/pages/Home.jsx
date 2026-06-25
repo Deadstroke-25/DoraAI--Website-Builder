@@ -11,7 +11,7 @@ import {
   Globe,
   Eye,
   FileCode,
-  Download,
+  Upload,
   ChevronRight,
 } from "lucide-react"
 import { motion } from "framer-motion"
@@ -27,7 +27,7 @@ const FEATURES = [
   {
     icon: Sparkles,
     title: "AI Website Generation",
-    description: "Generate complete website layouts from a single natural language prompt using Gemini AI.",
+    description: "Generate complete website layouts from a single natural language prompt using advanced AI.",
     color: "indigo",
   },
   {
@@ -51,7 +51,7 @@ const FEATURES = [
   {
     icon: Code,
     title: "Production Code Export",
-    description: "Export clean HTML, CSS, JavaScript and React components ready for deployment.",
+    description: "Export production-ready code or deploy your website directly with a single click.",
     color: "amber",
   },
   {
@@ -73,16 +73,16 @@ const ICON_STYLES = {
 
 const TIMELINE_STEPS = [
   { icon: Pencil, label: "Prompt" },
-  { icon: Brain, label: "Gemini AI" },
-  { icon: Globe, label: "Generation" },
+  { icon: Brain, label: "AI Processing" },
+  { icon: Globe, label: "Website Generation" },
   { icon: Eye, label: "Live Preview" },
   { icon: FileCode, label: "Edit" },
-  { icon: Download, label: "Export" },
+  { icon: Upload, label: "Export or Deploy" },
 ]
 
 const TECH_STACK = [
-  "React", "Redux Toolkit", "Node.js", "Express.js",
-  "MongoDB", "Firebase Auth", "Gemini API", "Tailwind CSS", "Vercel",
+  "React", "Tailwind CSS", "Redux Toolkit", "Node.js",
+  "Express.js", "MongoDB", "Firebase Auth", "LLM Integration", "Vercel", "GitHub",
 ]
 
 const WHY_CARDS = [
@@ -93,11 +93,11 @@ const WHY_CARDS = [
 ]
 
 const METRICS = [
-  { value: "<15s", label: "Generation Time" },
-  { value: "100%", label: "Responsive Design" },
-  { value: "Google", label: "Authentication" },
+  { value: "<15min", label: "Generation Time" },
+  { value: "Cross-Platform", label: "Desktop \u2022 Tablet \u2022 Mobile" },
+  { value: "Secure", label: "Authentication" },
   { value: "Clean", label: "Production Code" },
-  { value: "Modern", label: "UI Components" },
+  { value: "Responsive", label: "UI" },
 ]
 
 const FOOTER_LINKS = [
@@ -106,7 +106,7 @@ const FOOTER_LINKS = [
   { label: "Dashboard", path: "/dashboard" },
 ]
 
-const FOOTER_TECH = ["React", "Node.js", "MongoDB", "Firebase", "Gemini API"]
+const FOOTER_TECH = ["React", "Node.js", "MongoDB", "Firebase", "LLM Integration", "Vercel", "GitHub"]
 
 /* ─── Reusable Sub-Components ─── */
 
@@ -240,9 +240,9 @@ const Home = () => {
               transition={{ duration: 0.7, delay: 0.05 }}
               className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight max-w-4xl mx-auto"
             >
-              Build Production-Ready Websites
+              Generate Production-Ready
               <span className="block mt-3 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Using AI
+                Websites with AI
               </span>
             </motion.h1>
 
@@ -253,11 +253,11 @@ const Home = () => {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="max-w-2xl mx-auto mt-6 text-sm md:text-base text-zinc-400 leading-relaxed"
             >
-              Describe your website in natural language.
+              Describe your idea in natural language.
               <br className="hidden sm:block" />{" "}
-              DoraAI generates responsive layouts, modern UI components,
+              DoraAI transforms your prompt into responsive websites,
               <br className="hidden sm:block" />{" "}
-              and deployable code powered by Gemini AI.
+              modern user interfaces, and production-ready code using advanced AI.
             </motion.p>
 
             {/* Buttons */}
@@ -385,8 +385,8 @@ const Home = () => {
           <div className="max-w-5xl mx-auto px-6">
             <SectionHeading
               eyebrow="Stack"
-              title="Built With"
-              description="Modern technologies powering the DoraAI platform."
+              title="Technology Stack"
+              description="Modern technologies powering DoraAI."
             />
 
             <motion.div
@@ -419,7 +419,7 @@ const Home = () => {
             <SectionHeading
               eyebrow="Advantages"
               title="Why DoraAI"
-              description="Built for developers, designers, and creators who want results fast."
+              description="Designed for developers, startups, and creators who want to build modern websites faster with AI."
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -479,10 +479,10 @@ const Home = () => {
             >
               <div className="rounded-3xl bg-[#070709]/90 backdrop-blur-xl p-10 md:p-16 text-center border border-white/[0.04]">
                 <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4">
-                  Start Building with DoraAI Today
+                  Turn Your Ideas Into Websites
                 </h2>
                 <p className="text-zinc-400 text-sm md:text-base max-w-lg mx-auto mb-8 leading-relaxed">
-                  Transform ideas into responsive websites using the power of Gemini AI.
+                  Generate modern, responsive websites powered by advanced AI.
                 </p>
                 <motion.button
                   onClick={handleStartBuilding}
@@ -513,7 +513,7 @@ const Home = () => {
                   </span>
                 </div>
                 <p className="text-sm text-zinc-500 leading-relaxed max-w-xs">
-                  AI Website Builder powered by Gemini AI.
+                  AI Website Builder powered by advanced AI.
                 </p>
               </div>
 
@@ -538,7 +538,7 @@ const Home = () => {
 
               {/* Built With */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-4">Built With</h4>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-4">Technology</h4>
                 <ul className="space-y-2.5">
                   {FOOTER_TECH.map(tech => (
                     <li key={tech} className="text-sm text-zinc-500">{tech}</li>
