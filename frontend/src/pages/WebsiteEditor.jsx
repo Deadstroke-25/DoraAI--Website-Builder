@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { Code2, MessageSquare, Monitor, Rocket, Send, X } from 'lucide-react'
+import { ArrowLeft, Code2, MessageSquare, Monitor, Rocket, Send, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Editor from '@monaco-editor/react';
 
 const thinkingSteps = [
@@ -14,6 +14,7 @@ const thinkingSteps = [
 ]
 
 const WebsiteEditor = () => {
+    const navigate = useNavigate()
     const [website, setWebsite] = useState(null)
     const [error, setError] = useState("")
     const [code, setCode] = useState("")
@@ -129,7 +130,16 @@ const WebsiteEditor = () => {
             {/* preview */}
             <div className='flex-1 flex flex-col'>
                 <div className='h-14 px-4 flex justify-between items-center border-b border-white/10 bg-black/80'>
-                    <span className='text-xs text-zinc-400'>Live Preview</span>
+                    <div className='flex items-center gap-2'>
+                        <button 
+                            onClick={() => navigate('/dashboard')} 
+                            className='p-1.5 rounded-lg hover:bg-white/10 transition cursor-pointer text-zinc-400 hover:text-white lg:hidden'
+                            title="Back to Dashboard"
+                        >
+                            <ArrowLeft size={16} />
+                        </button>
+                        <span className='text-xs text-zinc-400'>Live Preview</span>
+                    </div>
                     <div className='flex gap-2'>
                         {website.deployed ? "": <button 
                         onClick={handleDeploy}
@@ -216,8 +226,15 @@ const WebsiteEditor = () => {
 
     function Header() {
         return (
-            <div className='h-14 px-4 flex items-center justify-between border-b border-white/10'>
-                <span className='font-semibold truncate'>{website.title}</span>
+            <div className='h-14 px-4 flex items-center gap-3 border-b border-white/10'>
+                <button 
+                    onClick={() => navigate('/dashboard')} 
+                    className='p-1.5 rounded-lg hover:bg-white/10 transition cursor-pointer text-zinc-400 hover:text-white'
+                    title="Back to Dashboard"
+                >
+                    <ArrowLeft size={16} />
+                </button>
+                <span className='font-semibold truncate flex-1'>{website.title}</span>
                 <button onClick={()=>setShowChat(false)} className='lg:hidden'><X/></button>
             </div>
         )
