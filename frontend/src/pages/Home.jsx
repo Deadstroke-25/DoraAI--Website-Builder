@@ -1,10 +1,24 @@
 import { ArrowRight, Sparkles, Zap, LayoutTemplate, Download } from "lucide-react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { useState } from "react"
 import Navbar from "../components/Navbar"
+import LoginModal from "../components/LoginModal"
 
 const Home = () => {    
     const navigate = useNavigate()
+    const { userData } = useSelector(state => state.user)
+    const [openLogin, setOpenLogin] = useState(false)
+
+    const handleStartBuilding = () => {
+        if (userData) {
+            navigate('/generate')
+        } else {
+            setOpenLogin(true)
+        }
+    }
+
   return (
     <>
     <Navbar/>
@@ -72,7 +86,7 @@ const Home = () => {
           transition={{ delay: 0.3 }}
           className="flex flex-col sm:flex-row justify-center gap-4 mt-10"
         >
-          <button onClick={()=>navigate('/generate')} className="flex items-center justify-center gap-2 px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-xl font-semibold transition">
+          <button onClick={handleStartBuilding} className="flex items-center justify-center gap-2 px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-xl font-semibold transition cursor-pointer">
             Start Building
             <ArrowRight size={18} />
           </button>
@@ -85,7 +99,7 @@ const Home = () => {
         {/* Feature cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-400 transition">
+          <div onClick={handleStartBuilding} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer text-left">
             <Zap className="text-yellow-400 mb-4" />
             <h3 className="font-semibold text-lg mb-2">
               Instant Generation
@@ -95,7 +109,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-400 transition">
+          <div onClick={handleStartBuilding} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer text-left">
             <LayoutTemplate className="text-indigo-400 mb-4" />
             <h3 className="font-semibold text-lg mb-2">
               Responsive Layout
@@ -105,7 +119,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-400 transition">
+          <div onClick={handleStartBuilding} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer text-left">
             <Download className="text-green-400 mb-4" />
             <h3 className="font-semibold text-lg mb-2">
               Export Code
@@ -119,6 +133,13 @@ const Home = () => {
 
       </div>
     </section>
+
+    {openLogin && (
+      <LoginModal
+        open={openLogin}
+        onClose={() => setOpenLogin(false)}
+      />
+    )}
     </>
   )
 }
