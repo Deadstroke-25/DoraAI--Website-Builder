@@ -63,9 +63,9 @@ const WebsiteEditor = () => {
         const handleGetWebsite = async () => {
             try {
                 const result = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/website/getbyid/${id}`, { withCredentials: true })
-                setWebsite(result.data)
-                setCode(result.data.latestCode)
-                setMessages(result.data.conversation)
+                setWebsite(result.data.website)
+                setCode(result.data.website.latestCode)
+                setMessages(result.data.website.conversation)
             } catch (error) {
                 setError(error.response.data.message)
                 console.log(error)

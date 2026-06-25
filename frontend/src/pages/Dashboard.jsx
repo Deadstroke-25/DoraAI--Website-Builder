@@ -28,7 +28,7 @@ function Dashboard() {
       try {
         setLoading(true)
         const result = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/website/getall`, { withCredentials: true })
-        setWebsites(result.data)
+        setWebsites(result.data.websites)
       } catch (error) {
         setError(error.response.data.message)
         console.log(error)
