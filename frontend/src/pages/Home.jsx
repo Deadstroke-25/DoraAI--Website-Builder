@@ -99,7 +99,7 @@ const Home = () => {
         {/* Feature cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
 
-          <div onClick={handleStartBuilding} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer text-left">
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500/30 transition-all duration-300 text-left">
             <Zap className="text-yellow-400 mb-4" />
             <h3 className="font-semibold text-lg mb-2">
               Instant Generation
@@ -109,7 +109,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div onClick={handleStartBuilding} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer text-left">
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500/30 transition-all duration-300 text-left">
             <LayoutTemplate className="text-indigo-400 mb-4" />
             <h3 className="font-semibold text-lg mb-2">
               Responsive Layout
@@ -119,7 +119,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div onClick={handleStartBuilding} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer text-left">
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur hover:border-indigo-500/30 transition-all duration-300 text-left">
             <Download className="text-green-400 mb-4" />
             <h3 className="font-semibold text-lg mb-2">
               Export Code
