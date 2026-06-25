@@ -1,5 +1,6 @@
 import express from 'express'
 import 'dotenv/config'
+import mongoose from 'mongoose'
 import connectDB from './database/db.js'
 import authRoute from './routes/authRoute.js'
 import websiteRoute from './routes/websiteRoute.js'
@@ -16,7 +17,9 @@ const PORT = process.env.PORT || 3000
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,
-        message: "Server is running"
+        message: "Server is running",
+        dbStatus: mongoose.connection.readyState,
+        hasMongoUri: !!process.env.MONGO_URI
     });
 });
 
