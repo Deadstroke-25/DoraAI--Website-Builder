@@ -1,4 +1,4 @@
-import { ArrowLeft, Sparkles, Wand2, Layout, Monitor, ShoppingBag, Loader2, CheckCircle2, Circle } from 'lucide-react'
+import { ArrowLeft, Sparkles, Wand2, Layout, Monitor, ShoppingBag, Loader2, CheckCircle2, Circle, Coins } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -46,7 +46,22 @@ const Generate = () => {
     const [progress, setProgress] = useState(0)
     const [phaseIndex, setPhaseIndex] = useState(0)
     const [error, setError] = useState("")
+    const [openProfile, setOpenProfile] = useState(false)
     const { userData } = useSelector(state => state.user)
+
+    const handleLogout = async () => {
+        try {
+            await axios.get(
+                `${import.meta.env.VITE_SERVER_URL}/api/auth/logout`,
+                { withCredentials: true }
+            )
+            dispatch(setUserData(null))
+            setOpenProfile(false)
+            navigate('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const handleGenerateWebsite = async () => {
         try {
@@ -172,6 +187,84 @@ const Generate = () => {
                             Creator Hub
                         </span>
                     </div>
+
+                    {/* Credits & Profile */}
+                    {userData && (
+                        <div className="flex items-center gap-4">
+                            {/* Credits Badge */}
+                            <motion.div
+                                whileHover={{ scale: 1.03, borderColor: "rgba(234, 179, 8, 0.4)" }}
+                                whileTap={{ scale: 0.97 }}
+                                onClick={() => navigate("/pricing")}
+                                className="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-yellow-500/5 border border-yellow-500/10 text-xs font-semibold uppercase tracking-wider cursor-pointer hover:bg-yellow-500/10 transition-all duration-300 shadow-[0_0_15px_rgba(234,179,8,0.03)]"
+                            >
+                                <Coins size={14} className="text-yellow-400 animate-pulse" />
+                                <span className="text-yellow-400">{userData.credits}</span>
+                                <span className="text-zinc-400">Credits</span>
+                                <span className="text-yellow-400 font-bold ml-0.5">+</span>
+                            </motion.div>
+
+                            {/* Profile Avatar */}
+                            <div className="relative">
+                                <button
+                                    onClick={() => setOpenProfile(!openProfile)}
+                                    className="flex items-center focus:outline-none"
+                                >
+                                    <img
+                                        referrerPolicy="no-referrer"
+                                        className="w-9 h-9 rounded-xl border border-white/15 object-cover hover:border-indigo-500/50 hover:scale-105 transition-all duration-300"
+                                        src={
+                                            userData?.avatar ||
+                                            `https://ui-avatars.com/api/?name=${userData.name}`
+                                        }
+                                    />
+                                </button>
+
+                                <AnimatePresence>
+                                    {openProfile && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            transition={{ duration: 0.2, ease: "easeOut" }}
+                                            className="absolute right-0 mt-3 w-60 rounded-xl bg-[#0a0a0c] border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden z-50"
+                                        >
+                                            <div className="px-4 py-3.5 border-b border-white/[0.06] bg-white/[0.02]">
+                                                <p className="text-sm font-semibold truncate text-white">
+                                                    {userData.name}
+                                                </p>
+                                                <p className="text-xs text-zinc-500 truncate mt-0.5">
+                                                    {userData.email}
+                                                </p>
+                                            </div>
+
+                                            <button
+                                                onClick={() => { navigate("/dashboard"); setOpenProfile(false); }}
+                                                className="w-full px-4 py-3 text-left text-sm hover:bg-white/[0.04] text-zinc-300 hover:text-white transition-colors"
+                                            >
+                                                Dashboard
+                                            </button>
+
+                                            <button
+                                                onClick={() => { navigate("/pricing"); setOpenProfile(false); }}
+                                                className="md:hidden w-full px-4 py-3 flex items-center gap-2 text-zinc-300 hover:text-white text-sm hover:bg-white/[0.04] transition-colors"
+                                            >
+                                                <Coins size={14} className="text-yellow-400" />
+                                                {userData.credits} Credits
+                                            </button>
+
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full px-4 py-3 text-left text-sm hover:bg-red-500/10 text-red-400 hover:text-red-300 transition-colors border-t border-white/[0.04]"
+                                            >
+                                                Logout
+                                            </button>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 
