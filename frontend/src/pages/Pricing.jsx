@@ -1,10 +1,11 @@
 import { ArrowLeft, Check, Coins } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setUserData } from '../redux/userSlice'
+import LoginModal from '../components/LoginModal'
 
 
 const plans = [
@@ -57,10 +58,16 @@ const plans = [
 const Pricing = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { userData } = useSelector(state => state.user)
+    const [openLogin, setOpenLogin] = useState(false)
 
     const handlePayment = async (plan) => {
         if (plan.id === "free") {
             navigate("/dashboard")
+            return
+        }
+        if (!userData) {
+            setOpenLogin(true)
             return
         }
         try {  
@@ -166,6 +173,13 @@ const Pricing = () => {
                     </motion.div>
                 ))}
             </div>
+
+            {openLogin && (
+                <LoginModal
+                    open={openLogin}
+                    onClose={() => setOpenLogin(false)}
+                />
+            )}
         </div>
     )
 }

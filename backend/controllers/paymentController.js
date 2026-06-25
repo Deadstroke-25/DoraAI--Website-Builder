@@ -17,7 +17,7 @@ export const createOrder = async (req, res) => {
             });
         }
 
-        const amount = plan.amount;
+        const amount = plan.price;
         const credits = plan.credits;
         if (!amount || !credits) {
             return res.status(400).json({ message: "Invalid plan data" })
