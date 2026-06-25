@@ -1,14 +1,72 @@
 @import "tailwindcss";
 
-.animated-bg {
-  height: 100vh;
-  background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0ea5e9, #22c55e);
-  background-size: 400% 400%;
-  animation: gradientMove 12s ease infinite;
+/* Smooth Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+::-webkit-scrollbar-track {
+  background: #030303;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f2e;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #312e47;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(10, 10, 12, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(15, 15, 20, 0.85);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Animated glow overlay */
+@keyframes drift {
+  0% {
+    transform: rotate(0deg) translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) translate(30px, -50px) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-drift-slow {
+  animation: drift 25s infinite alternate ease-in-out;
+}
+
+.animate-drift-slower {
+  animation: drift 35s infinite alternate-reverse ease-in-out;
+}
+
+/* Mesh animation background */
+.animated-bg {
+  background: radial-gradient(circle at 50% 50%, #0c0813 0%, #030305 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.mesh-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
 }

@@ -27,77 +27,98 @@ const LoginModal = ({ open, onClose }) => {
     }
     return (
         <div>
-            {open &&
+            {open && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className='fixed inset-0 flex z-100 items-center justify-center bg-black/80 backdrop-blur-xl px-4'>
+                    className='fixed inset-0 flex z-50 items-center justify-center bg-black/80 backdrop-blur-xl px-4'
+                >
                     <motion.div
-                        initial={{ scale: 0.88, opacity: 0, y: 60 }}
+                        initial={{ scale: 0.9, opacity: 0, y: 20 }}
                         animate={{ scale: 1, opacity: 1, y: 0 }}
-                        exit={{ scale: 0.9, opacity: 0, y: 40 }}
-                        transition={{ duration: 0.45, ease: "easeOut" }}
-                        className='relative w-full max-w-md p-px rounded-3xl bg-linear-to-br from-purple-500/40 via-blue-500/30 to-transparent'
+                        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                        transition={{ duration: 0.4, cubicBezier: [0.16, 1, 0.3, 1] }}
+                        className='relative w-full max-w-md p-px rounded-3xl bg-gradient-to-br from-indigo-500/30 via-purple-500/20 to-transparent'
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className='relative rounded-3xl bg-[#0b0b0b] border border-white/10 shadow-[0_30px_120px_rgba(0,0,0,0,0.8)] overflow-hidden'>
+                        <div className='relative rounded-3xl bg-[#070709]/95 border border-white/[0.06] shadow-[0_30px_100px_rgba(0,0,0,0.8)] overflow-hidden'>
+                            {/* Glowing Blobs */}
                             <motion.div
-                                animate={{ opacity: [0.25, 0.4, 0.25] }}
-                                transition={{ duration: 6, repeat: Infinity }}
-                                className='absolute -top-32 -left-32 w-80 h-80 bg-purple-500/30 blur-[140px]'
+                                animate={{ 
+                                    x: [0, 20, 0],
+                                    y: [0, -20, 0],
+                                    opacity: [0.2, 0.3, 0.2] 
+                                }}
+                                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                                className='absolute -top-40 -left-40 w-80 h-80 bg-indigo-500/20 rounded-full blur-[100px] pointer-events-none'
                             />
                             <motion.div
-                                animate={{ opacity: [0.2, 0.35, 0.2] }}
-                                transition={{ duration: 6, repeat: Infinity, delay: 2 }}
-                                className='absolute -bottom-32 -right-32 w-80 h-80 bg-blue-500/25 blur-[140px]'
+                                animate={{ 
+                                    x: [0, -20, 0],
+                                    y: [0, 20, 0],
+                                    opacity: [0.15, 0.25, 0.15] 
+                                }}
+                                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                                className='absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-[100px] pointer-events-none'
                             />
-                            <button onClick={onClose} className='absolute top-5 right-5 z-20 text-zinc-400 hover:text-white transition text-lg'><X /></button>
-                            <div className='relative px-8 pt-14 pb-10 text-center'>
+                            
+                            {/* Close Button */}
+                            <button 
+                                onClick={onClose} 
+                                className='absolute top-5 right-5 z-20 p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-all text-zinc-400 cursor-pointer'
+                            >
+                                <X size={16} />
+                            </button>
+                            
+                            <div className='relative px-8 pt-14 pb-10 text-center z-10'>
                                 <div
-                                    initial={{ opacity: 0, y: -20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-white/10 rounded-full bg-white/5 backdrop-blur"
+                                    className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 border border-white/[0.08] rounded-full bg-white/5 backdrop-blur-md"
                                 >
-                                    <Sparkles className="w-4 h-4 text-purple-400" />
-                                    <span className="text-sm text-gray-300">
+                                    <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
                                         AI Website Builder
                                     </span>
                                 </div>
-                                <h2 className='text-3xl font-semibold leading-tight mb-3 space-x-2 '>
-                                    <span className='text-white'>Welcome to</span>
-                                    <span className='bg-linear-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent'>Dora ai</span>
+                                
+                                <h2 className='text-2xl md:text-3xl font-extrabold leading-tight mb-3 text-white'>
+                                    Welcome to{" "}
+                                    <span className='bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'>
+                                        Dora AI
+                                    </span>
                                 </h2>
+                                <p className='text-zinc-400 text-sm mb-8 leading-relaxed max-w-xs mx-auto'>
+                                    Sign in to access your dashboard, credits, and start building high-performance sites.
+                                </p>
+                                
                                 <motion.button
                                     onClick={handleGoogleAuth}
-                                    whileHover={{ scale: 1.04 }}
-                                    whileTap={{ scale: 0.96 }}
-                                    className='group relative w-full h-13 rounded-xl bg-white text-black font-semibold shadow-xl overflow-hidden'>
-                                    <div className='relative flex items-center justify-center gap-3'>
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/3840px-Google_%22G%22_logo.svg.png" alt="" className='h-5 w-5' />
-                                        Continue with Google
-                                    </div>
-
+                                    whileHover={{ scale: 1.02, boxShadow: "0 0 20px rgba(99, 102, 241, 0.2)" }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className='group relative w-full h-12 rounded-xl bg-white text-black font-bold shadow-lg overflow-hidden flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer'
+                                >
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/3840px-Google_%22G%22_logo.svg.png" alt="Google Logo" className='h-5 w-5' />
+                                    <span>Continue with Google</span>
                                 </motion.button>
 
-                                <div className='flex items-center gap-4 my-10'>
-                                    <div className='h-px flex-1 bg-white/10' />
-                                    <span className='text-xs tracking-tight text-zinc-500'>Secure Login</span>
-                                    <div className='h-px flex-1 bg-white/10' />
+                                <div className='flex items-center gap-4 my-8'>
+                                    <div className='h-px flex-1 bg-white/[0.06]' />
+                                    <span className='text-[10px] font-semibold uppercase tracking-wider text-zinc-600'>Secure Authorization</span>
+                                    <div className='h-px flex-1 bg-white/[0.06]' />
                                 </div>
 
-                                <p className='text-xs text-zinc-500 leading-relaxed'>
-                                    By continuing you agree to our{" "}
-                                    <span className='underline cursor-pointer hover:text-zinc-300'>Terms of Services</span>{" "}
+                                <p className='text-[11px] text-zinc-500 leading-relaxed px-4'>
+                                    By proceeding, you agree to our{" "}
+                                    <span className='text-zinc-400 hover:text-white underline cursor-pointer transition-colors'>Terms of Service</span>{" "}
                                     and{" "}
-                                    <span className='underline cursor-pointer hover:text-zinc-300'>Privacy Policy</span>
+                                    <span className='text-zinc-400 hover:text-white underline cursor-pointer transition-colors'>Privacy Policy</span>.
                                 </p>
                             </div>
                         </div>
                     </motion.div>
                 </motion.div>
-            }
+            )}
         </div>
     )
 }
